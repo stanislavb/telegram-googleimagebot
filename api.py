@@ -72,7 +72,7 @@ class GoogleImagesAPI(API):
 
     def random_image(self, query, results=8):
         results = self.images(query, results)
-        return random.choice(results)
-
-    def random_image_url(self, query, results=8):
-        return self.random_image(query, results)['url']
+        if results:
+            return random.choice(results)
+        else:
+            return None

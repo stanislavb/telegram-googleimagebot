@@ -2,8 +2,6 @@
 import argparse
 import logging
 import time
-import requests
-from contextlib import closing
 from api import TelegramAPI, GoogleImagesAPI
 
 
@@ -42,8 +40,12 @@ if __name__ == "__main__":
                 if 'text' in message:
                     text = message['text'].split(maxsplit=1)
                     if len(text) == 2 and text[0] == '/image':
-                        url = googleapi.random_image_url(query=text[1])
-                        logger.info('Searched for {}, found {}'.format(text[1], url))
-                        telegramapi.send_message(chat_id, text=url)
+                        image = googleapi.random_image(query=text[1])
+                        if image is None:
+                            found = "nothing"
+                        else:
+                            found = image['url']
+                        returntext = ('Searched for {}, found {}'.format(text[1], found))
+                        telegramapi.send_message(chat_id, text=returntext)
             if update['update_id'] >= offset:
                 offset = update['update_id'] + 1
