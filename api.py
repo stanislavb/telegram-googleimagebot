@@ -68,7 +68,7 @@ class GoogleImagesAPI(API):
 
     def images(self, query, results=8):
         assert 1 <= results <= 8
-        return self.get('images', v='1.0', rsz=results, imgsz='small', q=query)
+        return self.get('images', v='1.0', rsz=results, q=query)
 
     def random_image(self, query, results=8):
         results = self.images(query, results)
