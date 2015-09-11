@@ -64,7 +64,10 @@ class TelegramBot:
         chat_id = message['chat']['id']
         returntext = self.handle_message(message)
         if returntext:
-            self.api.send_message(chat_id, text=returntext)
+            try:
+                self.api.send_message(chat_id, text=returntext)
+            except:
+                logger.exception()
         return returntext
 
 
