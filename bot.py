@@ -29,6 +29,8 @@ class TelegramBot:
         }
 
     def image(self, text):
+        if text is None:
+            return 'Need an argument for image search. Try "/image cute cats"'
         image = self.gimage_api.random_image(query=text)
         if image is None:
             found = "nothing"
