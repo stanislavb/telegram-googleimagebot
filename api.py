@@ -47,6 +47,9 @@ class TelegramAPI(API):
             logger.error('API returned error: {}'.format(content['description']))
         return content['result']
 
+    def get_me(self):
+        return self.get('getMe')
+
     def get_updates(self, **kwargs):
         return self.get('getUpdates', **kwargs)
 
