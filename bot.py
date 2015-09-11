@@ -67,7 +67,7 @@ class TelegramBot:
             try:
                 self.api.send_message(chat_id, text=returntext)
             except:
-                logger.exception()
+                logger.exception("Failed to send message.")
         return returntext
 
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                 limit=args.limit,
                 timeout=args.timeout)
         except:
-            logger.exception()
+            logger.exception("Failed to get updates.")
         for update in updates:
             if 'message' in update:
                 bot.respond(update['message'])
